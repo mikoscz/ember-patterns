@@ -2,7 +2,7 @@
 
 module.exports = function(environment) {
   let ENV = {
-    modulePrefix: 'ember-selleo-examples',
+    modulePrefix: 'ember-patterns',
     environment,
     rootURL: '/',
     locationType: 'auto',
