@@ -1,0 +1,15 @@
+<h3>Todos:</h3>
+
+{{#loaders/todo-loader as |loader|}}
+  {{#if loader.isRunning}}
+    {{#content-placeholders as |placeholder|}}
+      {{placeholder.text lines=3}}
+    {{/content-placeholders}}
+  {{else}}
+    <ul>
+      {{#each loader.data as |todo|}}
+        <li>{{todo.name}}</li>
+      {{/each}}
+    </ul>
+  {{/if}}
+{{/loaders/todo-loader}}
