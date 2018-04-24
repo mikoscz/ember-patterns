@@ -9,6 +9,7 @@ const Router = EmberRouter.extend({
 Router.map(function() {
   this.route('fetching', function() {
     this.route('component');
+    this.route('route');
   });
 });
 

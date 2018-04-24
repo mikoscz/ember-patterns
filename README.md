@@ -1,56 +1,60 @@
-# ember-patterns
+# Ember Patterns
 
-This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
+## 1. Fetching data inside of the component
 
-## Prerequisites
+### Motivation
+When we are fetching data in route we are blocking the UI with the `model()` hook,
+until the model's promise is not resolved we cannot render our template. Instead of that,
+we can fetch the data inside of component, and keep in our route only params/session validations.
 
-You will need the following things properly installed on your computer.
+### Demo
+tbu.
 
-* [Git](https://git-scm.com/)
-* [Node.js](https://nodejs.org/) (with npm)
-* [Ember CLI](https://ember-cli.com/)
-* [Google Chrome](https://google.com/chrome/)
+### Example
+```javascript
+import Component from '@ember/component';
+import { task, timeout } from 'ember-concurrency';
 
-## Installation
+export default Component.extend({
+  tagName: '',
 
-* `git clone <repository-url>` this repository
-* `cd ember-patterns`
-* `npm install`
+  init() {
+    this._super(...arguments);
+    this.set('data', []);
+  },
 
-## Running / Development
+  didInsertElement() {
+    this.get('query').perform();
+  },
 
-* `ember serve`
-* Visit your app at [http://localhost:4200](http://localhost:4200).
-* Visit your tests at [http://localhost:4200/tests](http://localhost:4200/tests).
+  query: task(function * () {
+    const payload = yield this.get('store').findAll('todo');
+    this.set('data', payload);
+  }).restartable()
+});
+```
 
-### Code Generators
+### Packages
+[ember-concurrency](http://ember-concurrency.com/docs/introduction/)
 
-Make use of the many generators for code, try `ember help generate` for more details
+### Testing
+tbu.
 
-### Running Tests
 
-* `ember test`
-* `ember test --server`
+## 2. Content placeholders
 
-### Linting
+### Motivation
+Noone like to wait for the website to load. With content placeholders we can replace annoying spinners,
+with some nice animation that's shape looks like the content that would be there after some time.
 
-* `npm run lint:js`
-* `npm run lint:js -- --fix`
+### Demo
+tbu.
 
-### Building
+### Example
+tbu.
 
-* `ember build` (development)
-* `ember build --environment production` (production)
+### Packages
+[ember-content-placeholders](https://github.com/michalsnik/ember-content-placeholders/)
 
-### Deploying
-
-Specify what it takes to deploy your app.
-
-## Further Reading / Useful Links
-
-* [ember.js](https://emberjs.com/)
-* [ember-cli](https://ember-cli.com/)
-* Development Browser Extensions
-  * [ember inspector for chrome](https://chrome.google.com/webstore/detail/ember-inspector/bmdblncegkenkacieihfhpjfppoconhi)
-  * [ember inspector for firefox](https://addons.mozilla.org/en-US/firefox/addon/ember-inspector/)
+### Testing
+tbu.

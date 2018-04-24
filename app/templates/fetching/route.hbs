@@ -1,0 +1,13 @@
+<h3>Todos:</h3>
+
+{{#if model.isRunning}}
+  {{#content-placeholders as |placeholder|}}
+    {{placeholder.text lines=3}}
+  {{/content-placeholders}}
+{{else}}
+  <ul>
+    {{#each model.data as |todo|}}
+      <li>{{todo.name}}</li>
+    {{/each}}
+  </ul>
+{{/if}}
